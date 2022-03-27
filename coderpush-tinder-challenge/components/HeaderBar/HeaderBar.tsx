@@ -16,7 +16,7 @@ const HeaderBar: React.FunctionComponent = () => (
         <FaHeart color="#14C96F" size="20" />
       </a>
     </Link>
-    <Link href="/">
+    <Link href="/pass">
       <a title="Passed">
         <CgClose color="#D64F52" size="22" />
       </a>
