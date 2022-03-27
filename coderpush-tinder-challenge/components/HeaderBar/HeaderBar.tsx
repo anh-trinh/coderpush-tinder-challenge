@@ -11,7 +11,7 @@ const HeaderBar: React.FunctionComponent = () => (
         <FaGlobe color="#236BDE" />
       </a>
     </Link>
-    <Link href="/">
+    <Link href="/like">
       <a title="Liked">
         <FaHeart color="#14C96F" size="20" />
       </a>
