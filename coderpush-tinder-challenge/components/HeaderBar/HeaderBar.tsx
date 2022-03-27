@@ -21,7 +21,7 @@ const HeaderBar: React.FunctionComponent = () => (
         <CgClose color="#D64F52" size="22" />
       </a>
     </Link>
-    <Link href="/">
+    <Link href="/match">
       <a title="Matches">
         <FaStar color="#643DD9" size="21" />
       </a>
