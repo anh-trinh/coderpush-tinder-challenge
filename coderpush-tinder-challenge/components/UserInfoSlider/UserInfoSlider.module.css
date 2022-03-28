@@ -2,10 +2,19 @@
   border-radius: 5px;
   box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
   padding-bottom: 5px;
+  height: 530px;
+  overflow: hidden;
+}
+
+.avatar {
+  position: absolute;
+  width: 100%;
 }
 
 .basic_info {
   font-size: 20px;
   font-weight: bold;
+  position: absolute;
+  top: 620px;
   margin: 10px;
 }

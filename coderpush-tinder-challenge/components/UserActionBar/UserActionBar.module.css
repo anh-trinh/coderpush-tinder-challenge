@@ -14,3 +14,11 @@
   background: white;
   box-shadow: rgba(99, 99, 99, 0.38) 0 2px 8px 0;
 }
+
+.like_button:active {
+  box-shadow: #14C96F 0 2px 8px 0;
+}
+
+.pass_button:active {
+  box-shadow: #D64F52 0 2px 8px 0;
+}

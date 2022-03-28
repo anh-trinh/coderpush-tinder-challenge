@@ -1,33 +1,46 @@
 import * as React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Zoom } from 'swiper';
 import styles from './UserInfoSlider.module.css';
-import 'swiper/css';
-import 'swiper/css/zoom';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import { User } from '../../models/User';
+import { animated, SpringValue, useSpringRef, useTransition } from 'react-spring';
+import { useEffect } from 'react';
 
-const UserInfoSlider: React.FunctionComponent = () => (
-  <div className={styles.container}>
-    <Swiper zoom={true} modules={[Zoom]} className="mySwiper">
-      <SwiperSlide>
-        <div className="swiper-zoom-container">
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="swiper-zoom-container">
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="swiper-zoom-container">
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </div>
-      </SwiperSlide>
-    </Swiper>
-    <div className={styles.basic_info}>Patrick, 38</div>
-  </div>
-);
+type Props = {
+  discoverUser: User;
+  discoverUserIndex: number;
+};
+
+const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
+  const discoverUser: User = props?.discoverUser;
+  const discoverUserIndex: number = props?.discoverUserIndex ?? 0;
+  const fullName: string = [discoverUser?.firstName, discoverUser?.lastName].filter(
+    (name: string) => !!name
+  ).join(' ') ?? '';
+
+  const transRef = useSpringRef();
+  const transitions = useTransition(discoverUserIndex, {
+    ref: transRef,
+    keys: null,
+    from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
+    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
+    leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
+  });
+
+  useEffect(() => {
+    transRef.start();
+  }, [discoverUserIndex]);
+
+  return discoverUser ? (
+    <div className={styles.container}>
+      {transitions((style: {opacity: SpringValue<number>, transform: SpringValue<string>}, _index: number) => {
+        return (
+          <animated.div style={{...style}}>
+            <img className={styles.avatar} alt={discoverUser.lastName} src={discoverUser.picture}/>
+          </animated.div>
+        );
+      })}
+      <div className={styles.basic_info}>{fullName}, 38</div>
+    </div>
+  ) : <></>;
+};
 
 export default UserInfoSlider;
