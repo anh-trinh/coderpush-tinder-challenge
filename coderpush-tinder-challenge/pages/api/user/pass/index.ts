@@ -1,4 +1,4 @@
-import connectDB from '../../../../middleware/Mongodb';
+import connectDB from '../../../../middlewares/Mongodb';
 import { userActionHandler } from '../../../../utils/HandlerUtils';
 import { USER_PASSES_FIELD } from '../../../../constants/SchemaConstants';
 

@@ -1,5 +1,5 @@
 import UserSchema from '../../../schemas/UserSchema';
-import connectDB from '../../../middleware/Mongodb';
+import connectDB from '../../../middlewares/Mongodb';
 
 const userDetailHandler = async (request: any, response: any) => {
     const { method, query: { id } } = request;
