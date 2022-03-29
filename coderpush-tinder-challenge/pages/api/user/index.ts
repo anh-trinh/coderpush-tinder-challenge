@@ -14,10 +14,11 @@ const userHandler = async (request: any, response: any) => {
           currentUserId
         );
         const currentUserLikes: string[] = currentUser?.likes ?? [];
+        const currentUserPasses: string[] = currentUser?.passes ?? [];
         const users: User[] = await UserSchema.find({})
           .where('_id')
           .ne(currentUserId)
-          .nin([...currentUserLikes])
+          .nin([...currentUserLikes, ...currentUserPasses])
           .skip((page - 1) * limit)
           .limit(limit);
         response.status(200).json({ success: true, data: users });

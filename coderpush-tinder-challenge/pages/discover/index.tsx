@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { getUsers } from '../../services/UserService';
 import { User } from '../../models/User';
 import { USER_FETCHING_LIMIT } from '../../constants/DefaultConstants';
-import { likeUserById } from '../../services/ActionService';
+import { likeUserById, passUserById } from '../../services/ActionService';
 
 const DiscoverPage: NextPage = () => {
   const [discoverUserIndex, setDiscoverUserIndex] = useState<number>(0);
@@ -37,14 +37,19 @@ const DiscoverPage: NextPage = () => {
   }, [discoverUserIndex]);
 
   const handleLikeClick = (): void => {
-    const currentDiscoverUser: User = discoverUsers[discoverUserIndex];
     onActionClick();
+    const currentDiscoverUser: User = discoverUsers[discoverUserIndex];
     likeUserById(currentDiscoverUser._id).catch((error) => {
       console.log('Error when like a user', error);
     });
   };
+
   const handlePassClick = (): void => {
     onActionClick();
+    const currentDiscoverUser: User = discoverUsers[discoverUserIndex];
+    passUserById(currentDiscoverUser._id).catch((error) => {
+      console.log('Error when pass a user', error);
+    });
   };
 
   const updateNewDiscoverUsers = (discoverUserIndex: number): void => {
