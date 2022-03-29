@@ -1,16 +1,20 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { USER_URL } from '../constants/ApiConstants';
 import { User } from '../models/User';
-import { List } from '../models/List';
 import { USER_FETCHING_LIMIT } from '../constants/DefaultConstants';
+import { getCurrentUser } from '../utils/UserUtils';
 
 export const getUsers = (page: number): Promise<User[]> => {
+  const currentUser: User = getCurrentUser() ?? {} as User;
   return axios.get(USER_URL, {
-    headers: {
-      'app-id': '6241182867ada2393a8b658c'
-    },
-    params: { page, limit: USER_FETCHING_LIMIT }
+    params: { page, limit: USER_FETCHING_LIMIT, currentUserId: currentUser._id }
   } as AxiosRequestConfig)
-    .then((response: AxiosResponse<List>) => response?.data)
-    .then((list: List) => list?.data ?? []);
+    .then((response: AxiosResponse) => response?.data?.data ?? []);
+}
+
+export const getFakeCurrentUser = (): Promise<User> => {
+  return axios.get(USER_URL, {
+    params: { page: 1, limit: 1 }
+  } as AxiosRequestConfig)
+    .then((response: AxiosResponse) => response?.data?.data?.[0] ?? {});
 }
