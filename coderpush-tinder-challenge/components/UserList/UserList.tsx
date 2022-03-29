@@ -1,23 +1,19 @@
 import * as React from 'react';
 import UserItem from '../UserItem/UserItem';
 import styles from './UserList.module.css';
+import { User } from '../../models/User';
 
-const UserList: React.FunctionComponent = () => (
-  <div className={styles.container}>
-    <UserItem />
-    <UserItem />
-    <UserItem />
-    <UserItem />
-    <UserItem />
-    <UserItem />
-    <UserItem />
-    <UserItem />
-    <UserItem />
-    <UserItem />
-    <UserItem />
-    <UserItem />
-    <UserItem />
-  </div>
-);
+type Props = {
+    users: User[];
+}
+
+const UserList: React.FunctionComponent<Props> = (props: Props) => {
+    const users: User[] = props?.users || [];
+    return (
+      <div className={styles.container}>
+          {users.map((user: User) => <UserItem user={user} />)}
+      </div>
+    );
+};
 
 export default UserList;

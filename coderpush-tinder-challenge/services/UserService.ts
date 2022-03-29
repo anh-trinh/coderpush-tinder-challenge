@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { USER_URL } from '../constants/ApiConstants';
+import { USER_LIKE_URL, USER_URL } from '../constants/ApiConstants';
 import { User } from '../models/User';
 import { USER_FETCHING_LIMIT } from '../constants/DefaultConstants';
 import { getCurrentUserId } from '../utils/UserUtils';
@@ -20,3 +20,10 @@ export const getFakeCurrentUserId = (): Promise<string> => {
     } as AxiosRequestConfig)
     .then((response: AxiosResponse) => response?.data?.data?.[0]?._id ?? '');
 };
+
+export const getLikedUsers = (): Promise<User[]> => {
+  const currentUserId: string = getCurrentUserId() ?? '';
+  return axios
+    .get(`${USER_LIKE_URL}/${currentUserId}`)
+    .then((response: AxiosResponse) => response?.data?.data ?? []);
+}

@@ -8,6 +8,7 @@ import {
   useTransition,
 } from 'react-spring';
 import { useEffect } from 'react';
+import { getAge } from '../../utils/UserUtils';
 
 type Props = {
   discoverUser: User;
@@ -21,6 +22,7 @@ const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
     [discoverUser?.firstName, discoverUser?.lastName]
       .filter((name: string) => !!name)
       .join(' ') ?? '';
+  const age: number = getAge(discoverUser?.dateOfBirth);
 
   const transRef = useSpringRef();
   const transitions = useTransition(discoverUserIndex, {
@@ -57,7 +59,7 @@ const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
           );
         }
       )}
-      <div className={styles.basic_info}>{fullName}, 38</div>
+      <div className={styles.basic_info}>{fullName}, {age}</div>
     </div>
   ) : (
     <></>

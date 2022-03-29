@@ -3,7 +3,7 @@ export interface User {
   firstName: string;
   lastName: string;
   picture: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   likes: string[];
   passes: string[];
 }
