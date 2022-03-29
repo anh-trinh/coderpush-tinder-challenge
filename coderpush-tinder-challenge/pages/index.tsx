@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getFakeCurrentUserId } from '../services/UserService';
 import { getCurrentUserId } from '../utils/UserUtils';
+import { DISCOVER_HREF } from '../constants/RouteConstants';
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (!!currentUserId) {
-      router.push('/discover');
+      router.push(DISCOVER_HREF);
     }
   }, [currentUserId]);
 
