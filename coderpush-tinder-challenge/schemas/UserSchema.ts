@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema({
   dateOfBirth: {
     type: Date,
     default: Date.now
-  }
+  },
+  likes: [String]
 });
 
 export default mongoose.models.UserSchema || mongoose.model('UserSchema', userSchema);
