@@ -11,7 +11,7 @@ import { USER_FETCHING_LIMIT } from '../../constants/DefaultConstants';
 const DiscoverPage: NextPage = () => {
   const [discoverUserIndex, setDiscoverUserIndex] = useState<number>(0)
   const [discoverUsers, setDiscoverUsers] = useState<User[]>([]);
-  const [userPage, setUserPage] = useState<number>(0);
+  const [userPage, setUserPage] = useState<number>(1);
 
   const onActionClick = useCallback(
     () => setDiscoverUserIndex((index: number) => (index + 1) % USER_FETCHING_LIMIT), []

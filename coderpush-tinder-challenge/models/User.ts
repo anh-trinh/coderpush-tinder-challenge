@@ -1,9 +1,9 @@
 export interface User {
-  id: string,
+  _id: string,
   firstName: string,
   lastName: string,
   picture: string,
-  dateOfBirth: string,
+  dateOfBirth: Date,
   likes: string[],
   passes: string[]
 }
