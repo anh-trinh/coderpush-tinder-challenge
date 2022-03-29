@@ -14,7 +14,7 @@ const LikePage: NextPage = () => {
     getLikedUsers().then((responseUsers: User[]) => {
       setLikedUsers(responseUsers);
     });
-  }, [])
+  }, []);
 
   return (
     <Layout title="Like">
