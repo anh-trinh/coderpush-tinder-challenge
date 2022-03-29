@@ -1,11 +1,6 @@
-import { User } from '../models/User';
-
-export const getCurrentUser = (): User | undefined => {
+export const getCurrentUserId = (): string => {
   if (typeof window !== 'undefined') {
-    const storedCurrentUser: string = localStorage?.getItem('currentUser') ?? '';
-    if (!!storedCurrentUser) {
-      return JSON.parse(storedCurrentUser);
-    }
+    return localStorage?.getItem('currentUserId') ?? '';
   }
-  return undefined;
+  return '';
 }

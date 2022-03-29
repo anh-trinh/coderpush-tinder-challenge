@@ -2,32 +2,33 @@ import type { NextPage } from 'next';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getFakeCurrentUser } from '../services/UserService';
-import { User } from '../models/User';
-import { getCurrentUser } from '../utils/UserUtils';
+import { getFakeCurrentUserId } from '../services/UserService';
+import { getCurrentUserId } from '../utils/UserUtils';
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const [currentUser, setCurrentUser] = useState<User | undefined>(getCurrentUser());
+  const [currentUserId, setCurrentUserId] = useState<string>(getCurrentUserId());
 
   useEffect(() => {
-    if (!currentUser) {
+    if (!currentUserId) {
       assignCurrentUser();
     }
   },[]);
 
   useEffect(() => {
-    if (!!currentUser) {
+    if (!!currentUserId) {
       router.push('/discover');
     }
-  },[currentUser]);
+  },[currentUserId]);
 
   const assignCurrentUser = (): void => {
-    getFakeCurrentUser().then((responseUser: User) => {
-      if (!!responseUser) {
-        localStorage?.setItem('currentUser', JSON.stringify(responseUser));
-        setCurrentUser(responseUser);
+    getFakeCurrentUserId().then((responseUserId: string) => {
+      if (!!responseUserId) {
+        localStorage?.setItem('currentUserId', responseUserId);
+        setCurrentUserId(responseUserId);
       }
+    }).catch((error) => {
+      console.log('Error when getting fake current user', error);
     });
   }
 

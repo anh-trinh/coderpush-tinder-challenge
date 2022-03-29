@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { getUsers } from '../../services/UserService';
 import { User } from '../../models/User';
 import { USER_FETCHING_LIMIT } from '../../constants/DefaultConstants';
+import { likeUserById } from '../../services/ActionService';
 
 const DiscoverPage: NextPage = () => {
   const [discoverUserIndex, setDiscoverUserIndex] = useState<number>(0)
@@ -20,6 +21,8 @@ const DiscoverPage: NextPage = () => {
   useEffect(() => {
     getUsers(userPage).then((responseUsers: User[]) => {
       setDiscoverUsers([...discoverUsers, ...responseUsers]);
+    }).catch((error) => {
+      console.log('Error when getting list of users', error);
     });
   }, [userPage]);
 
@@ -28,7 +31,12 @@ const DiscoverPage: NextPage = () => {
   }, [discoverUserIndex]);
 
   const handleLikeClick = (): void => {
+    const currentDiscoverUser: User = discoverUsers[discoverUserIndex];
     onActionClick();
+    likeUserById(currentDiscoverUser._id)
+      .catch((error) => {
+        console.log('Error when like a user', error);
+      });
   }
   const handlePassClick = (): void => {
     onActionClick();
