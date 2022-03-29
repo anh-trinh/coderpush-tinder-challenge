@@ -6,7 +6,7 @@ import { CgClose } from '@react-icons/all-files/cg/CgClose';
 type Props = {
   handleLikeClick: () => void;
   handlePassClick: () => void;
-}
+};
 
 const UserActionBar: React.FunctionComponent<Props> = (props: Props) => {
   const handleLikeClick: () => void = props?.handleLikeClick;
@@ -28,7 +28,7 @@ const UserActionBar: React.FunctionComponent<Props> = (props: Props) => {
         <FaHeart color="#14C96F" size="30" />
       </button>
     </div>
-  )
+  );
 };
 
 export default UserActionBar;

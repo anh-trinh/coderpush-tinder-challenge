@@ -3,22 +3,23 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: true
+    required: true,
   },
   lastName: {
     type: String,
-    required: true
+    required: true,
   },
   picture: {
     type: String,
-    required: true
+    required: true,
   },
   dateOfBirth: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   likes: [String],
-  passes: [String]
+  passes: [String],
 });
 
-export default mongoose.models.UserSchema || mongoose.model('UserSchema', userSchema);
+export default mongoose.models.UserSchema ||
+  mongoose.model('UserSchema', userSchema);

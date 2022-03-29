@@ -1,23 +1,23 @@
 .container {
-    padding: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0 2px 4px 0;
-    display: flex;
+  padding: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0 2px 4px 0;
+  display: flex;
 }
 
 .user_avatar {
-    border-radius: 50%;
-    width: 65px;
+  border-radius: 50%;
+  width: 65px;
 }
 
 .user_basic_info {
-    margin-top: 10px;
-    margin-left: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .user_name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .user_age {
-    color: #726E80;
+  color: #726e80;
 }

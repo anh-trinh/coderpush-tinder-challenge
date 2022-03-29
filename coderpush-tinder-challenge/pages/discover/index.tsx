@@ -10,47 +10,54 @@ import { USER_FETCHING_LIMIT } from '../../constants/DefaultConstants';
 import { likeUserById } from '../../services/ActionService';
 
 const DiscoverPage: NextPage = () => {
-  const [discoverUserIndex, setDiscoverUserIndex] = useState<number>(0)
+  const [discoverUserIndex, setDiscoverUserIndex] = useState<number>(0);
   const [discoverUsers, setDiscoverUsers] = useState<User[]>([]);
   const [userPage, setUserPage] = useState<number>(1);
 
   const onActionClick = useCallback(
-    () => setDiscoverUserIndex((index: number) => (index + 1) % USER_FETCHING_LIMIT), []
+    () =>
+      setDiscoverUserIndex(
+        (index: number) => (index + 1) % USER_FETCHING_LIMIT
+      ),
+    []
   );
 
   useEffect(() => {
-    getUsers(userPage).then((responseUsers: User[]) => {
-      setDiscoverUsers([...discoverUsers, ...responseUsers]);
-    }).catch((error) => {
-      console.log('Error when getting list of users', error);
-    });
+    getUsers(userPage)
+      .then((responseUsers: User[]) => {
+        setDiscoverUsers([...discoverUsers, ...responseUsers]);
+      })
+      .catch((error) => {
+        console.log('Error when getting list of users', error);
+      });
   }, [userPage]);
 
   useEffect(() => {
-    updateNewDiscoverUsers(discoverUserIndex)
+    updateNewDiscoverUsers(discoverUserIndex);
   }, [discoverUserIndex]);
 
   const handleLikeClick = (): void => {
     const currentDiscoverUser: User = discoverUsers[discoverUserIndex];
     onActionClick();
-    likeUserById(currentDiscoverUser._id)
-      .catch((error) => {
-        console.log('Error when like a user', error);
-      });
-  }
+    likeUserById(currentDiscoverUser._id).catch((error) => {
+      console.log('Error when like a user', error);
+    });
+  };
   const handlePassClick = (): void => {
     onActionClick();
-  }
+  };
 
   const updateNewDiscoverUsers = (discoverUserIndex: number): void => {
     if (discoverUserIndex + 1 === USER_FETCHING_LIMIT) {
       setUserPage(userPage + 1);
-    }
-    else if (discoverUserIndex === 0) {
-      const removedDisplayedUsers = discoverUsers.slice(USER_FETCHING_LIMIT, discoverUsers.length);
+    } else if (discoverUserIndex === 0) {
+      const removedDisplayedUsers = discoverUsers.slice(
+        USER_FETCHING_LIMIT,
+        discoverUsers.length
+      );
       setDiscoverUsers(removedDisplayedUsers);
     }
-  }
+  };
 
   return (
     <Layout title="Discover">
@@ -65,7 +72,9 @@ const DiscoverPage: NextPage = () => {
             handlePassClick={handlePassClick}
           />
         </>
-      ) : <></>}
+      ) : (
+        <></>
+      )}
     </Layout>
   );
 };

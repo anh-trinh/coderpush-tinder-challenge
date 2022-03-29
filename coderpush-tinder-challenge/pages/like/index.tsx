@@ -7,9 +7,7 @@ import styles from '../../styles/LikePage.module.css';
 const LikePage: NextPage = () => {
   return (
     <Layout title="Like">
-      <div className={styles.title}>
-        Liked
-      </div>
+      <div className={styles.title}>Liked</div>
       <UserList />
     </Layout>
   );

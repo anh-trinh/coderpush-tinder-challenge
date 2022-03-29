@@ -1,13 +1,13 @@
 .container {
-    height: 580px;
-    overflow-y: scroll;
+  height: 580px;
+  overflow-y: scroll;
 }
 
 .container::-webkit-scrollbar {
-    width: 5px;
+  width: 5px;
 }
 
 .container::-webkit-scrollbar-thumb {
-    background: #DFE1E6;
-    border-radius: 3px;
+  background: #dfe1e6;
+  border-radius: 3px;
 }

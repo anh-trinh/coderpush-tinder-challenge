@@ -1,7 +1,12 @@
 import * as React from 'react';
 import styles from './UserInfoSlider.module.css';
 import { User } from '../../models/User';
-import { animated, SpringValue, useSpringRef, useTransition } from 'react-spring';
+import {
+  animated,
+  SpringValue,
+  useSpringRef,
+  useTransition,
+} from 'react-spring';
 import { useEffect } from 'react';
 
 type Props = {
@@ -12,9 +17,10 @@ type Props = {
 const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
   const discoverUser: User = props?.discoverUser;
   const discoverUserIndex: number = props?.discoverUserIndex ?? 0;
-  const fullName: string = [discoverUser?.firstName, discoverUser?.lastName].filter(
-    (name: string) => !!name
-  ).join(' ') ?? '';
+  const fullName: string =
+    [discoverUser?.firstName, discoverUser?.lastName]
+      .filter((name: string) => !!name)
+      .join(' ') ?? '';
 
   const transRef = useSpringRef();
   const transitions = useTransition(discoverUserIndex, {
@@ -31,16 +37,31 @@ const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
 
   return discoverUser ? (
     <div className={styles.container}>
-      {transitions((style: {opacity: SpringValue<number>, transform: SpringValue<string>}, _index: number) => {
-        return (
-          <animated.div style={{...style}}>
-            <img className={styles.avatar} alt={discoverUser.lastName} src={discoverUser.picture}/>
-          </animated.div>
-        );
-      })}
+      {transitions(
+        (
+          style: {
+            opacity: SpringValue<number>;
+            transform: SpringValue<string>;
+          },
+          index: number
+        ) => {
+          return (
+            <animated.div style={{ ...style }}>
+              <img
+                key={index}
+                className={styles.avatar}
+                alt={discoverUser.lastName}
+                src={discoverUser.picture}
+              />
+            </animated.div>
+          );
+        }
+      )}
       <div className={styles.basic_info}>{fullName}, 38</div>
     </div>
-  ) : <></>;
+  ) : (
+    <></>
+  );
 };
 
 export default UserInfoSlider;

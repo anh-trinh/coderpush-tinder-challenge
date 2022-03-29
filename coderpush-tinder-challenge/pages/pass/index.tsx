@@ -7,9 +7,7 @@ import styles from '../../styles/PassPage.module.css';
 const PassPage: NextPage = () => {
   return (
     <Layout title="Pass">
-      <div className={styles.title}>
-        Passed
-      </div>
+      <div className={styles.title}>Passed</div>
       <UserList />
     </Layout>
   );

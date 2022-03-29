@@ -11,7 +11,7 @@ const connectDB = (handler: any) => async (request: any, response: any) => {
   // Use new db connection
   await mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   } as any);
   return handler(request, response);
 };

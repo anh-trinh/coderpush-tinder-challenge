@@ -3,4 +3,4 @@ export const getCurrentUserId = (): string => {
     return localStorage?.getItem('currentUserId') ?? '';
   }
   return '';
-}
+};

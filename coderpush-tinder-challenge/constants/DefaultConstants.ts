@@ -1,1 +1,1 @@
-export const USER_FETCHING_LIMIT: number = 5;
+export const USER_FETCHING_LIMIT = 5;

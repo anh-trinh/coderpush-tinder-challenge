@@ -7,9 +7,7 @@ import styles from '../../styles/MatchPage.module.css';
 const MatchPage: NextPage = () => {
   return (
     <Layout title="Matches">
-      <div className={styles.title}>
-        Matches
-      </div>
+      <div className={styles.title}>Matches</div>
       <UserList />
     </Layout>
   );

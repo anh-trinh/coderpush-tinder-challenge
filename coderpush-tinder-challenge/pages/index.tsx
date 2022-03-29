@@ -7,30 +7,34 @@ import { getCurrentUserId } from '../utils/UserUtils';
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const [currentUserId, setCurrentUserId] = useState<string>(getCurrentUserId());
+  const [currentUserId, setCurrentUserId] = useState<string>(
+    getCurrentUserId()
+  );
 
   useEffect(() => {
     if (!currentUserId) {
       assignCurrentUser();
     }
-  },[]);
+  }, []);
 
   useEffect(() => {
     if (!!currentUserId) {
       router.push('/discover');
     }
-  },[currentUserId]);
+  }, [currentUserId]);
 
   const assignCurrentUser = (): void => {
-    getFakeCurrentUserId().then((responseUserId: string) => {
-      if (!!responseUserId) {
-        localStorage?.setItem('currentUserId', responseUserId);
-        setCurrentUserId(responseUserId);
-      }
-    }).catch((error) => {
-      console.log('Error when getting fake current user', error);
-    });
-  }
+    getFakeCurrentUserId()
+      .then((responseUserId: string) => {
+        if (!!responseUserId) {
+          localStorage?.setItem('currentUserId', responseUserId);
+          setCurrentUserId(responseUserId);
+        }
+      })
+      .catch((error) => {
+        console.log('Error when getting fake current user', error);
+      });
+  };
 
   return <></>;
 };
