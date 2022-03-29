@@ -3,7 +3,12 @@ import styles from './HeaderBar.module.css';
 import Link from 'next/link';
 import { FaGlobe, FaHeart, FaStar } from 'react-icons/fa';
 import { CgClose } from '@react-icons/all-files/cg/CgClose';
-import { DISCOVER_HREF, LIKE_HREF, MATCH_HREF, PASS_HREF } from '../../constants/RouteConstants';
+import {
+  DISCOVER_HREF,
+  LIKE_HREF,
+  MATCH_HREF,
+  PASS_HREF,
+} from '../../constants/RouteConstants';
 
 const HeaderBar: React.FunctionComponent = () => (
   <nav className={styles.tab_bar_container}>

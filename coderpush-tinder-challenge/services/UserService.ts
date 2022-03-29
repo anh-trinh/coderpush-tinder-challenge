@@ -1,5 +1,10 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { USER_LIKE_URL, USER_PASS_URL, USER_URL } from '../constants/ApiConstants';
+import {
+  USER_LIKE_URL,
+  USER_MATCH_URL,
+  USER_PASS_URL,
+  USER_URL,
+} from '../constants/ApiConstants';
 import { User } from '../models/User';
 import { USER_FETCHING_LIMIT } from '../constants/DefaultConstants';
 import { getCurrentUserId } from '../utils/UserUtils';
@@ -31,3 +36,5 @@ const getRelatedUsers = (url: string) => (): Promise<User[]> => {
 export const getLikedUsers = getRelatedUsers(USER_LIKE_URL);
 
 export const getPassedUsers = getRelatedUsers(USER_PASS_URL);
+
+export const getMatchedUsers = getRelatedUsers(USER_MATCH_URL);

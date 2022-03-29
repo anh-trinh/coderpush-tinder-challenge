@@ -14,4 +14,4 @@ export const getAge = (dateString: string): number => {
     age--;
   }
   return age;
-}
+};

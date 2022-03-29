@@ -5,7 +5,7 @@ import { getAge } from '../../utils/UserUtils';
 
 type Props = {
   user: User;
-}
+};
 
 const UserItem: React.FunctionComponent<Props> = (props: Props) => {
   const user: User = props?.user;
@@ -18,11 +18,7 @@ const UserItem: React.FunctionComponent<Props> = (props: Props) => {
 
   return (
     <div className={styles.container}>
-      <img
-        alt={fullName}
-        className={styles.user_avatar}
-        src={picture}
-      />
+      <img alt={fullName} className={styles.user_avatar} src={picture} />
       <div className={styles.user_basic_info}>
         <div className={styles.user_name}>{fullName}</div>
         <div className={styles.user_age}>{age}</div>

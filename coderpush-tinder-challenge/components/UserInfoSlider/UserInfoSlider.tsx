@@ -45,12 +45,12 @@ const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
             opacity: SpringValue<number>;
             transform: SpringValue<string>;
           },
-          index: number
+          _index: number
         ) => {
           return (
             <animated.div style={{ ...style }}>
               <img
-                key={index}
+                key={discoverUser._id}
                 className={styles.avatar}
                 alt={discoverUser.lastName}
                 src={discoverUser.picture}
@@ -59,7 +59,9 @@ const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
           );
         }
       )}
-      <div className={styles.basic_info}>{fullName}, {age}</div>
+      <div className={styles.basic_info}>
+        {fullName}, {age}
+      </div>
     </div>
   ) : (
     <></>
