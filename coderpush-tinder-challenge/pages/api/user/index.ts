@@ -1,4 +1,4 @@
-import connectDB from '../../../middleware/mongodb';
+import connectDB from '../../../middleware/Mongodb';
 import UserSchema from '../../../schemas/UserSchema';
 
 const userHandler = async (request: any, response: any) => {

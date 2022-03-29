@@ -4,5 +4,6 @@ export interface User {
   lastName: string,
   picture: string,
   dateOfBirth: string,
-  likes: string[]
+  likes: string[],
+  passes: string[]
 }
