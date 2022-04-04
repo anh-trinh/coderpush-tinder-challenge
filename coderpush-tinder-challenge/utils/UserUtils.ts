@@ -5,7 +5,7 @@ export const getCurrentUserId = (): string => {
   return '';
 };
 
-export const getAge = (dateString: string): number => {
+export const getAge = (dateString: string): string => {
   const today = new Date();
   const dateOfBirth = new Date(dateString);
   let age = today.getFullYear() - dateOfBirth.getFullYear();
@@ -13,5 +13,5 @@ export const getAge = (dateString: string): number => {
   if (month < 0 || (month === 0 && today.getDate() < dateOfBirth.getDate())) {
     age--;
   }
-  return age;
+  return isNaN(age) ? '' : age.toString();
 };

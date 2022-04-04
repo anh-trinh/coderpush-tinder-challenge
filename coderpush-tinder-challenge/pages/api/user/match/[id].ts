@@ -1,6 +1,7 @@
 import { User } from '../../../../models/User';
 import UserSchema from '../../../../schemas/UserSchema';
 import connectDB from '../../../../middlewares/Mongodb';
+import { queryUserWithInfo } from '../../../../repositories/UserRepository';
 
 const matchHandler = async (request: any, response: any) => {
   const {
@@ -12,11 +13,12 @@ const matchHandler = async (request: any, response: any) => {
       try {
         const currentUser: User | null = await UserSchema.findById(id);
         const currentUserLikes: string[] = currentUser?.likes ?? [];
-        const users: User[] = await UserSchema.find({})
+        const users: User[] = await Promise.all((await UserSchema.find({}, '_id')
           .where('_id')
           .in(currentUserLikes)
           .where('likes')
-          .equals(id);
+          .equals(id)
+        ).map((user: User) => queryUserWithInfo(user?._id)));
         response.status(200).json({ success: true, data: users });
       } catch (error) {
         response.status(400).json({ success: false });

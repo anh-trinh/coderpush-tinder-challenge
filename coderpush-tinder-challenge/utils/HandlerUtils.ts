@@ -1,5 +1,6 @@
 import UserSchema from '../schemas/UserSchema';
 import { User } from '../models/User';
+import { queryUserWithInfo } from '../repositories/UserRepository';
 
 export const userActionHandler =
   (fieldName: string) => async (request: any, response: any) => {
@@ -44,9 +45,7 @@ export const actionHandler =
           const user: any = await UserSchema.findById(id);
           if (!!user) {
             const userIds: string[] = user[fieldName] ?? [];
-            const userList: User[] = await UserSchema.find({
-              _id: { $in: userIds },
-            });
+            const userList: User[] = await Promise.all(userIds.map((id: string) => queryUserWithInfo(id)));
             return response.status(200).json({ success: true, data: userList });
           }
           response.status(400).json({ success: false });

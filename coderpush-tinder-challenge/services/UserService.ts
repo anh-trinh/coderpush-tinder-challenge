@@ -18,6 +18,11 @@ export const getUsers = (page: number): Promise<User[]> => {
     .then((response: AxiosResponse) => response?.data?.data ?? []);
 };
 
+export const getUsersWithInfos = async (page: number): Promise<User[]> => {
+    const userIds: string[] = await getUsers(page).then((users: User[]) => users.map((user: User) => user?._id));
+    return axios.all(userIds.map((id: string) => getUserInfoById(id)));
+};
+
 export const getFakeCurrentUserId = (): Promise<string> => {
   return axios
     .get(USER_URL, {
@@ -38,3 +43,7 @@ export const getLikedUsers = getRelatedUsers(USER_LIKE_URL);
 export const getPassedUsers = getRelatedUsers(USER_PASS_URL);
 
 export const getMatchedUsers = getRelatedUsers(USER_MATCH_URL);
+
+export const getUserInfoById = (id: string): Promise<User> =>
+    axios.get(`${USER_URL}/${id}`)
+        .then((response: AxiosResponse) => response?.data?.data ?? []);

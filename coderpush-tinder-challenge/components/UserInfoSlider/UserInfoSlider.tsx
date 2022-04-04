@@ -22,7 +22,8 @@ const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
     [discoverUser?.firstName, discoverUser?.lastName]
       .filter((name: string) => !!name)
       .join(' ') ?? '';
-  const age: number = getAge(discoverUser?.dateOfBirth);
+  const age: string = getAge(discoverUser?.userInfo?.dateOfBirth);
+  const basicInfo: string = [fullName, age].filter((info: string) => !!info).join(', ');
 
   const transRef = useSpringRef();
   const transitions = useTransition(discoverUserIndex, {
@@ -60,7 +61,7 @@ const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
         }
       )}
       <div className={styles.basic_info}>
-        {fullName}, {age}
+        {basicInfo}
       </div>
     </div>
   ) : (

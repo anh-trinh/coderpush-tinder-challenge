@@ -1,5 +1,6 @@
-import UserSchema from '../../../schemas/UserSchema';
 import connectDB from '../../../middlewares/Mongodb';
+import { User } from '../../../models/User';
+import { queryUserWithInfo } from '../../../repositories/UserRepository';
 
 const userDetailHandler = async (request: any, response: any) => {
   const {
@@ -9,8 +10,7 @@ const userDetailHandler = async (request: any, response: any) => {
   switch (method) {
     case 'GET':
       try {
-        const user = await UserSchema.findById(id);
-
+        const user: User = await queryUserWithInfo(id);
         if (!user) {
           return response.status(400).json({ success: false });
         }

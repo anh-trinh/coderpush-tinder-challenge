@@ -4,7 +4,7 @@ import Layout from '../../components/Layout/Layout';
 import UserInfoSlider from '../../components/UserInfoSlider/UserInfoSlider';
 import UserActionBar from '../../components/UserActionBar/UserActionBar';
 import { useCallback, useEffect, useState } from 'react';
-import { getUsers } from '../../services/UserService';
+import { getUsersWithInfos } from '../../services/UserService';
 import { User } from '../../models/User';
 import { USER_FETCHING_LIMIT } from '../../constants/DefaultConstants';
 import { likeUserById, passUserById } from '../../services/ActionService';
@@ -23,7 +23,7 @@ const DiscoverPage: NextPage = () => {
   );
 
   useEffect(() => {
-    getUsers(userPage)
+    getUsersWithInfos(userPage)
       .then((responseUsers: User[]) => {
         setDiscoverUsers([...discoverUsers, ...responseUsers]);
       })
