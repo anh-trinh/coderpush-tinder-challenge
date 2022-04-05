@@ -13,22 +13,22 @@ import {
 const HeaderBar: React.FunctionComponent = () => (
   <nav className={styles.tab_bar_container}>
     <Link href={DISCOVER_HREF}>
-      <a title="Discover">
+      <a title="Discover" data-testid="discover_link">
         <FaGlobe color="#236BDE" />
       </a>
     </Link>
     <Link href={LIKE_HREF}>
-      <a title="Liked">
+      <a title="Liked" data-testid="liked_link">
         <FaHeart color="#14C96F" size="20" />
       </a>
     </Link>
     <Link href={PASS_HREF}>
-      <a title="Passed">
+      <a title="Passed" data-testid="passed_link">
         <CgClose color="#D64F52" size="22" />
       </a>
     </Link>
     <Link href={MATCH_HREF}>
-      <a title="Matches">
+      <a title="Matches" data-testid="match_link">
         <FaStar color="#643DD9" size="21" />
       </a>
     </Link>

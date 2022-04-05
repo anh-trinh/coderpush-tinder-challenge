@@ -22,7 +22,8 @@ const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
     [discoverUser?.firstName, discoverUser?.lastName]
       .filter((name: string) => !!name)
       .join(' ') ?? '';
-  const age: string = getAge(discoverUser?.userInfo?.dateOfBirth);
+  const dateOfBirth: string = discoverUser?.userInfo?.dateOfBirth ?? '';
+  const age: string = getAge(dateOfBirth);
   const basicInfo: string = [fullName, age].filter((info: string) => !!info).join(', ');
 
   const transRef = useSpringRef();

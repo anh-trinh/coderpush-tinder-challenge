@@ -4,7 +4,7 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy"
   },
-  setupFilesAfterEnv: ['<rootDir>/jest-setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.js', '<rootDir>/setupTests.js'],
   moduleDirectories: ["node_modules", "src"],
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',

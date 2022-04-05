@@ -14,7 +14,8 @@ const UserItem: React.FunctionComponent<Props> = (props: Props) => {
     [user?.firstName, user?.lastName]
       .filter((name: string) => !!name)
       .join(' ') ?? '';
-  const age: string = getAge(user?.userInfo?.dateOfBirth);
+  const dateOfBirth: string = user?.userInfo?.dateOfBirth ?? '';
+  const age: string = getAge(dateOfBirth);
 
   return (
     <div className={styles.container}>
