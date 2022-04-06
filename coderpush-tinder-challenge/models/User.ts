@@ -5,7 +5,7 @@ export interface User {
   firstName: string;
   lastName: string;
   picture: string;
-  likes?: string[];
-  passes?: string[];
-  userInfo?: UserInfo;
+  likes: string[];
+  passes: string[];
+  userInfo: UserInfo;
 }
