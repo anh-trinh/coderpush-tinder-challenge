@@ -18,11 +18,6 @@ export const getUsers = (page: number): Promise<User[]> => {
     .then((response: AxiosResponse) => response?.data?.data ?? []);
 };
 
-export const getUsersWithInfos = async (page: number): Promise<User[]> => {
-    const userIds: string[] = await getUsers(page).then((users: User[]) => users.map((user: User) => user?._id));
-    return axios.all(userIds.map((id: string) => getUserInfoById(id)));
-};
-
 export const getFakeCurrentUserId = (): Promise<string> => {
   return axios
     .get(USER_URL, {

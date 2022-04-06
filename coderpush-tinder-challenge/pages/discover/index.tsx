@@ -4,14 +4,16 @@ import Layout from '../../components/Layout/Layout';
 import UserInfoSlider from '../../components/UserInfoSlider/UserInfoSlider';
 import UserActionBar from '../../components/UserActionBar/UserActionBar';
 import { useCallback, useEffect, useState } from 'react';
-import { getUsersWithInfos } from '../../services/UserService';
+import { getUserInfoById, getUsers } from '../../services/UserService';
 import { User } from '../../models/User';
 import { USER_FETCHING_LIMIT } from '../../constants/DefaultConstants';
 import { likeUserById, passUserById } from '../../services/ActionService';
+import { UserInfo } from '../../models/UserInfo';
 
 const DiscoverPage: NextPage = () => {
   const [discoverUserIndex, setDiscoverUserIndex] = useState<number>(0);
   const [discoverUsers, setDiscoverUsers] = useState<User[]>([]);
+  const [discoverUserInfo, setDiscoverUserInfo] = useState<UserInfo>({});
   const [userPage, setUserPage] = useState<number>(1);
 
   const onActionClick = useCallback(
@@ -23,7 +25,7 @@ const DiscoverPage: NextPage = () => {
   );
 
   useEffect(() => {
-    getUsersWithInfos(userPage)
+    getUsers(userPage)
       .then((responseUsers: User[]) => {
         setDiscoverUsers([...discoverUsers, ...responseUsers]);
       })
@@ -36,10 +38,14 @@ const DiscoverPage: NextPage = () => {
     updateNewDiscoverUsers(discoverUserIndex);
   }, [discoverUserIndex]);
 
+  useEffect(() => {
+    getUserFurtherInfos(discoverUserIndex);
+  }, [discoverUserIndex, discoverUsers]);
+
   const handleLikeClick = (): void => {
     onActionClick();
     const currentDiscoverUser: User = discoverUsers[discoverUserIndex];
-    likeUserById(currentDiscoverUser._id).catch((error) => {
+    likeUserById(currentDiscoverUser?._id ?? '').catch((error) => {
       console.log('Error when like a user', error);
     });
   };
@@ -47,7 +53,7 @@ const DiscoverPage: NextPage = () => {
   const handlePassClick = (): void => {
     onActionClick();
     const currentDiscoverUser: User = discoverUsers[discoverUserIndex];
-    passUserById(currentDiscoverUser._id).catch((error) => {
+    passUserById(currentDiscoverUser?._id ?? '').catch((error) => {
       console.log('Error when pass a user', error);
     });
   };
@@ -64,6 +70,17 @@ const DiscoverPage: NextPage = () => {
     }
   };
 
+  const getUserFurtherInfos = (discoverUserIndex: number) => {
+    const currentDiscoverUserId: string = discoverUsers[discoverUserIndex]?._id ?? '';
+    if (!!currentDiscoverUserId) {
+      getUserInfoById(currentDiscoverUserId).then((responseUser: User) => {
+        setDiscoverUserInfo(responseUser.userInfo);
+      }).catch((error) => {
+        console.log('Error when getting list of users', error);
+      });
+    }
+  }
+
   return (
     <Layout title="Discover">
       {discoverUsers.length > 0 ? (
@@ -71,6 +88,7 @@ const DiscoverPage: NextPage = () => {
           <UserInfoSlider
             discoverUser={discoverUsers[discoverUserIndex]}
             discoverUserIndex={discoverUserIndex}
+            discoverUserInfo={discoverUserInfo}
           />
           <UserActionBar
             handleLikeClick={handleLikeClick}

@@ -9,20 +9,25 @@ import {
 } from 'react-spring';
 import { useEffect } from 'react';
 import { getAge } from '../../utils/UserUtils';
+import { UserInfo } from '../../models/UserInfo';
 
 type Props = {
   discoverUser: User;
   discoverUserIndex: number;
+  discoverUserInfo: UserInfo;
 };
 
 const UserInfoSlider: React.FunctionComponent<Props> = (props: Props) => {
   const discoverUser: User = props?.discoverUser;
   const discoverUserIndex: number = props?.discoverUserIndex ?? 0;
+  const discoverUserInfo: UserInfo = props?.discoverUserInfo ?? {};
+  console.log('bbbbbbbbbb discoverUserInfo', discoverUserInfo);
   const fullName: string =
     [discoverUser?.firstName, discoverUser?.lastName]
       .filter((name: string) => !!name)
       .join(' ') ?? '';
-  const age: string = getAge(discoverUser?.userInfo?.dateOfBirth);
+  const dateOfBirth: string = discoverUserInfo?.dateOfBirth ?? '';
+  const age: string = getAge(dateOfBirth);
   const basicInfo: string = [fullName, age].filter((info: string) => !!info).join(', ');
 
   const transRef = useSpringRef();
